@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mass Ave Public Safety</title>
+<style>
+#map {
+  height: 500px;
+  width: 700px;
+  margin: 25px 0px 25px 25px;
+} 
+
+#needle_map {
+  height: 500px;
+  width: 700px;
+  margin: auto;
+} 
+
+.map_title {
+  margin: 0px 100px 0px 125px;
+  font-size: large;
+}
+.body-text {
+  font-size: 18px;
+}
+</style>
+
+<!--  This page was built using the Portefeuille Free CSS Template-->
+<!--  Template URL: https://www.free-css.com/free-css-templates/page234/portefeuille-->
+
+  <!-- Stylesheets -->
+<link type="text/css" href="bootstrap/css/bootstrap.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Roboto:400,400italic,700,700italic,500italic,500,300italic,300' rel='stylesheet' type='text/css'>
+<link type="text/css" href="icons/font-awesome/css/font-awesome.css" rel="stylesheet">
+<link type="text/css" href="icons/rondo/style.css" rel="stylesheet">
+<link type="text/css" href="css/theme.css" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.1.0/dist/leaflet.css" />
+</head>
+
+<body>
+<header class="header" id="jump">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+        <a class="navbar-brand" href="#">DS4200 Group C6</a>
+      </div>
+      <div class="collapse navbar-collapse hidden-xs">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="active"><a href="#jump0">Home</a></li>
+          <li><a href="#jump1">Motivation</a></li>
+          <li><a href="#jump2">Data</a></li>
+          <li><a href="#jump3">Task Analysis</a></li>
+          <li><a href="#jump4">Design Process</a></li>
+          <li><a href="#jump5">Final Visualization</a></li>
+          <li><a href="#jump6">Data Analysis</a></li>
+          <li><a href="#jump7">Conclusion</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+      
+      <div class="collapse navbar-responsive-collapse">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#jump0" data-toggle="collapse" data-target=".navbar-responsive-collapse">Home</a></li>
+          <li><a href="#jump1" data-toggle="collapse" data-target=".navbar-responsive-collapse">Motivation</a></li>
+          <li><a href="#jump2" data-toggle="collapse" data-target=".navbar-responsive-collapse">Data</a></li>
+          <li><a href="#jump3" data-toggle="collapse" data-target=".navbar-responsive-collapse">Task Analysis</a></li>
+          <li><a href="#jump4" data-toggle="collapse" data-target=".navbar-responsive-collapse">Design Process</a></li>
+          <li><a href="#jump5" data-toggle="collapse" data-target=".navbar-responsive-collapse">Final Visualization</a></li>
+          <li><a href="#jump6" data-toggle="collapse" data-target=".navbar-responsive-collapse">Data Analysis</a></li>
+          <li><a href="#jump7" data-toggle="collapse" data-target=".navbar-responsive-collapse">Conclusion</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-responsive-collapse --> 
+    </div>
+  </nav>
+</header>
+<div class="jumper" id="jump0"></div>
+<div class="section type-1 big splash">
+  <div class="container">
+    <div class="splash-block">
+      <div class="centered">
+        <div class="container">
+          <div class="section-headlines">
+            <h1>Mass Ave Public Safety</h1>
+            <p>Data visualizations to help improve public safety along Mass Ave in the stretch between Huntington Ave and Boston Medical Center.</p>
+          </div>
+          <div>
+            <br />
+            <br />
+            <br />
+            <br />
+            <p>By: Milan Ghosh,  Joshua Liu, Ali Moeinzad</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="jump1" class="jumper"></div>
+<!-- Motivation -->
+<div class="section type-2">
+  <div class="container">
+    <div class="section-headlines">
+      <h4>Motivation</h4>
+      <p class="body-text">
+        The goal of this project is to help improve public safety along Massachusetts Avenue from Huntington
+        Ave to Boston Medical Center through data analysis and visualizations. This region is well known for being
+        afflicted by the opioid crisis, and we expect this to have a significant effect on the crime and public
+        safety data. This project will examine the relationships between distinct types of crime and public safety
+        issues, and the specific areas in which they occur in order to better understand why issues happen where
+        they do. This will hopefully assist the Mass Ave Coalition in their efforts to make the region a safer
+        environment for all residents and visitors.
+      </p>
+    </div>
+    <br>
+    <br>
+    <br>
+  </div>
+</div>
+
+<div id="jump2" class="jumper"></div>
+<!-- Data -->
+<div class="section type-3" style="padding-bottom: 0">
+  <div class="container">
+    <div class="section-headlines">
+      <h4>Data</h4>
+      <p class="body-text">
+        The city of Boston collects and publicizes datasets on Analyze Boston (data.boston.gov),
+        self-described as “the City of Boston's open data hub to find facts, figures, and maps related
+        to our lives within the city”. It provides access to at least 200 datasets, collected by
+        various systems and departments in the city, and makes it easy to interact with and download
+        the data.
+      </p>
+      <br>
+      <p class="body-text">
+        We focused on two datasets, “Crime Incident Reports” and
+        “311 Service Requests”, as these are both highly relevant to public safety. Criminal activity
+        is a fundamental component of public safety, and the 311 database contains records of public
+        nuisance reports, many of which can indirectly contribute to the sense of safety people will feel.
+        Importantly, this will contain the data on needle pickup locations, which is extremely relevant to
+        the state of public safety in this region. The data used in this report was for the period from
+        January 1, 2021 to October 17, 2021.
+      </p>
+    </div>
+  </div>
+  <!--end:.Data-->   
+</div>
+
+<div id="jump3" class="jumper"></div>
+<!-- Task Analysis -->
+<div class="section type-2">
+  <div class="container">
+    <div class="section-headlines">
+      <h4>Task Analysis</h4>
+      <h2>Our task analysis</h2>
+    </div>
+    <div>
+      <table class="table table-striped table-bordered table-condensed table-hover">
+        <tr>
+          <th>Index</th>
+          <th>"Domain" Task</th>
+          <th>Analytic Task (Low-level, "Query")</th>
+          <th>Search Task (Mid-level)</th>
+          <th>Analyze Task (High-level)</th>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>What is the most common type of crime/public safety issue that occurs?</td>
+          <td>Find extremum</td>
+          <td>Lookup</td>
+          <td>Discover</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>What is the most common type of crime/public safety issue that occurs? Where are the police and fire stations, and hospitals in the region?</td>
+          <td>Retrieve value</td>
+          <td>Locate</td>
+          <td>Discover</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Where does the most crime occur?</td>
+          <td>Find extremum</td>
+          <td>Locate</td>
+          <td>Discover</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>When does the most crime occur?</td>
+          <td>Find extremum</td>
+          <td>Locate</td>
+          <td>Discover</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Which types of crime have had the largest increase in frequency over the past few years?</td>
+          <td>Compare</td>
+          <td>Locate</td>
+          <td>Discover</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Where can you find the most needle trash?</td>
+          <td>Find extremum</td>
+          <td>Locate</td>
+          <td>Discover</td>
+        </tr>
+
+      </table>
+    </div>
+    <p class="body-text">The table above is our task analysis table. It was one of the first things we created,
+      and it’s supposed to help outline the design process for our visualizations and data analysis. 
+      To create this table we looked back at our interview and noted down keywords or keyphrases 
+      that we heard multiple times. This helped us figure out what the most important issues 
+      regarding public safety are and then from these we created our questions. 
+      Our final goal is to answer each of these questions with a visualization and 
+      the other columns in the table identify different attributes and purposes of these 
+      visualizations. After we made all our questions we then went back and ranked them. 
+      We determined the ranking of our questions based on the answers they would provide, 
+      and we decided that the most important question would be the one whose answer would 
+      reveal the most important information about public safety concerns.</p>
+    <!--end:.Task Analysis --> 
+    
+  </div>
+</div>
+
+<div id="jump4" class="jumper"></div>
+
+<!-- Design Process -->
+<div class="section type-3">
+  <div class="container">
+    <div class="section-headlines">
+      <h4>Design Process</h4>
+      <h2>Sketches and design process</h2>
+      <div>
+        <img src="images/sketch%201.gif" style="width:600px;height:600px; margin: 50px 0px 0px 0px">
+        <p class="body-text" style="width:600px; margin: 25px 150px 100px 275px;"> Since some of our tasks deal with the question of location we decided that creating a map to answer all those questions
+          would be the best option. On our map we wanted to answer the questions of where the most crime occurs
+          and where you can find the most needle trash? We decided the simplest and most effective way to show these would be by creating
+          a point for each recorded instance of a crime occuring. Since we are plotting multiple different crimes we need some way to differentiate 
+          them and we decided that the best way to do this would be by color coding the points.
+        </p>
+        <img src="images/sketch%202.gif" style="width:800px;height:600px;">
+        <p class="body-text" style="width:600px; margin: 25px 150px 25px 275px;"> One of our most important domain tasks is which crime occurs the most? To answer this question we wanted to create a bar graph
+          as they are an extremely effective visualization. We wanted each bar to be a type of crime and then the length of the bar to be the 
+          number of times that crime occurs. To make it even easier to read we planned on ordering the bar graph from highest to lowest
+          and then we also wanted to color code the different bars and crimes to match the color scheme of our map.
+        </p>
+      </div>
+    </div>
+    
+    <!--end:.row--> 
+  </div>
+  <!--end:.container--> 
+</div>
+
+<div id="jump5" class="jumper"></div>
+<!-- Final Visualization -->
+<div class="section type-2"> 
+  <div class="container-fluid">
+    <div class="section-headlines">
+      <h4>Final Visualization</h4>
+      <p style="width: 50%; margin: auto">A crime incident is an offense, emergency, or an occurrence that is
+        immediately dangerous to someone's life or health. An offense can be a violation,
+        misdemeanor, or felony. Crime incidents are recorded when the Boston Police Department (BPD) responds to 
+        one of these incidents. The data used in these visualizations is from January 1st 2021 to October 17th 2021. 
+        The data used is also limited to the area around Mass Ave.
+      </p>
+<!--<h2>Our final visualization</h2>-->
+      <div class="row">
+        <div class="col-md-6">
+          <h4>Top 30 Crime Incidents</h4>
+          <div>
+            <div id="bar"></div>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <h4>Individual Crime Incident Reports</h4>
+          <div id="map" class="col map"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button type="button" style="margin: 0 auto 50px auto" onclick="reset()">Reset</button>
+      </div>
+      <hr>
+
+      <div class="row">
+        <h4>Needle Trash</h4>
+        <div id="needle_map" class="col">
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div id="jump6" class="jumper"></div>
+<!-- Data Analysis-->
+<div class="section type-3">
+  <div class="container">
+    <div class="section-headlines">
+      <h4>Data Analysis</h4>
+      <h2>Interesting Results</h2>
+      <p class="body-text">The opioid epidemic has had an outsized effect on Massachusetts Avenue, 
+        where one can find many homeless people along well-known portions of the street. This population
+        is reflected in the crime incident data from BPD. The graph below depicts the top 10 crime incidents
+        in this region, using the “Incident Description” column of the crime dataset.
+        The top three crime incidents of “Investigate Person”, “Sick Assist”, and “Sick/Injured/Medical – 
+        Person” follow the theme of people who stand out because they appear either dangerous, in need of 
+        medical attention, or both. This will come as no surprise to anyone who frequents this area of the
+        street. However, the frequency of the first two incidents in comparison with the other eight does 
+        indicate the severity of the issue. Also, the fact that “Investigate Person” is ranked first shows
+        the suspicion and fear that the reporters of these incidents feel, which will have a very strong 
+        effect on the sense of safety that people will feel in this area. 
+        The following two incidents in the chart, “Assault – Simple” and “Assault – Aggravated” represent the
+        clear and obvious dangers of walking down this street. These are actual violent crimes that justify the 
+        sense of danger people experience down the street. This data provides validation for people who feel 
+        unsafe in the area, there is actual danger and risk. 
+      </p>
+      <br>
+      <p class="body-text">On the map it can be seen that crimes are generally evenly spread out throughout the area,
+        but there is clearly a higher concentration of crimes occurring in the bottom half of Mass 
+        Ave that is seen in the visualization. This logically makes sense because the top half is 
+        in the vicinity of Northeastern University’s campus, where there is a high concentration of 
+        students. Another takeaway is that assaults, both aggravated and simple, are especially common 
+        in the area around the Boston Medical Center, which shows that this area needs priority when
+        addressing the crime issue. However, the main takeaway from this map is that there is a lot
+        of crime in general and there is a very even spread of crimes and types of crimes throughout 
+        the area, which proves that action needs to be taken to address the crime issue along all of 
+        Mass Ave. There should be slightly more of a focus on the bottom half of Mass Ave., but the 
+        entire area needs a lot of attention in general.
+      </p>
+      </div>
+  </div>
+</div>
+
+<div id="jump7" class="jumper"></div>
+<!-- Conclusion-->
+<div class="section type-1">
+  <div class="container">
+    <div class="section-headlines">
+      <h4>Conclusion</h4>
+      <p class="body-text">We started off by identifying the most important domain task questions. In order to help answer these 
+        questions we created a visualization consisting of a map of crime incidents, a bar graph showing the number of occurrences
+         for each type of crime, and a map showing where needle trash has been found. The visualization supports interactivity that 
+         allows for functions such as filtering the data, navigating around the map, and showing more information through popups. 
+         The visualization can ultimately be utilized to help identify trends and patterns in public safety issues around Mass Ave. 
+         If any improvements were to be made to this project the first thing to do would be to a slider for the 
+        time of day. This would allow for further in depth analysis of when and where crimes occur. After that the next thing to add 
+        would be another map of all the 311 data other than needle trash. Needle trash is an important public safety issue which is why 
+        we created a map for it, but there are plenty of other public safety issues in the 311 data set that we didn't include.
+      </p>
+    </div>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      <a href="https://www.free-css.com/free-css-templates/page234/portefeuille">
+        Portefeuille - Free One Page Website Template &copy; Frittt.com
+      </a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!--Scripts-->
+<script src="https://d3js.org/d3.v6.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="dataPrep.js"></script>
+<script src="bar.js"></script>
+<script src="map.js"></script>
+<script src="needle_map.js"></script>
+<script src="interactionsController.js"></script>
+<script src="scripts/jquery-1.10.2.min.js"></script> 
+<script src="bootstrap/js/bootstrap.min.js"></script> 
+<script src="scripts/jquery.smooth-scroll.min.js"></script> 
+<script src="scripts/mixitup/jquery.mixitup.min.js"></script> 
+<script src="scripts/theme.js"></script> 
+<script>
+		$('.nav-tabs a').click(function (e) {
+			e.preventDefault();
+			$(this).tab('show');
+		})
+	</script>
+	
+</body>
